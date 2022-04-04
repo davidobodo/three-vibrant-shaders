@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import model from "./models/scene-processed.glb";
+import model from "./models/face/scene-processed.glb";
 console.log(model, "the model");
 let orbitControls = require("three-orbit-controls")(THREE);
 export default class Sketch {
@@ -34,6 +34,7 @@ export default class Sketch {
             this.scene.add(gltf.scene);
             gltf.scene.traverse((o) => {
                 if (o.isMesh) {
+                    o.geometry.center();
                     o.scale.set(0.01, 0.01, 0.01);
                 }
             });
@@ -44,11 +45,25 @@ export default class Sketch {
         this.geometry = new THREE.PlaneBufferGeometry(0.5, 0.5);
         this.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
         this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.scene.add(this.mesh);
+        // this.scene.add(this.mesh);
     }
+
+    // stop() {
+    //     this.isPlaying = false;
+    // }
+
+    // play(){
+    //     if(!this.playing){
+    //         this.render();
+    //         this.isPlaying = true;
+    //     }
+    // }
 
     render() {
         this.time++;
+        // if(!this.playing) return;
+        // this.time += 0.05;
+        // this.material.uniforms.time.value = this.time;
         this.renderer.render(this.scene, this.camera);
         window.requestAnimationFrame(this.render.bind(this));
     }
