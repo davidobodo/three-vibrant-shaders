@@ -32,6 +32,11 @@ export default class Sketch {
         this.loader.load(model, (gltf) => {
             console.log(gltf);
             this.scene.add(gltf.scene);
+            gltf.scene.traverse((o) => {
+                if (o.isMesh) {
+                    o.scale.set(0.01, 0.01, 0.01);
+                }
+            });
         });
     }
 
