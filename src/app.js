@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import model from "./models/face/scene-processed.glb";
+import fragment from "./shaders/fragment.glsl";
+import vertex from "./shaders/vertex.glsl";
 console.log(model, "the model");
 let orbitControls = require("three-orbit-controls")(THREE);
 export default class Sketch {
@@ -45,7 +47,20 @@ export default class Sketch {
 
     addMesh() {
         this.geometry = new THREE.PlaneBufferGeometry(0.5, 0.5);
-        this.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+        this.material = new THREE.ShaderMaterial({
+            fragmentShader: fragment,
+            vertexShader: vertex,
+            uniforms: {
+                time: {
+                    type: "f",
+                    value: 0
+                },
+                progress: {
+                    type: "f",
+                    value: 0
+                }
+            }
+        });
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         // this.scene.add(this.mesh);
     }

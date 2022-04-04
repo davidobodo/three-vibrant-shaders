@@ -19,6 +19,7 @@
   "dependencies": {
     "file-loader": "^6.2.0",
     "three": "^0.139.2",
-    "three-orbit-controls": "^82.1.0"
+    "three-orbit-controls": "^82.1.0",
+    "webpack-glsl-loader": "^1.0.1"
   }
 }
