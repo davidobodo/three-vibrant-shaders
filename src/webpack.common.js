@@ -3,7 +3,19 @@ const path = require("path");
 module.exports = {
     entry: "./src/app.js",
     module: {
-        rules: []
+        rules: [
+            {
+                test: /\.(glb|gltf)$/,
+                use: [
+                    {
+                        loader: "file-loader"
+                        // options: {
+                        //     outputPath: "assets/models/"
+                        // }
+                    }
+                ]
+            }
+        ]
     },
     resolve: {
         extensions: [".js"]
