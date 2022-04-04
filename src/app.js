@@ -36,6 +36,8 @@ export default class Sketch {
                 if (o.isMesh) {
                     o.geometry.center();
                     o.scale.set(0.01, 0.01, 0.01);
+                    o.material = this.material;
+                    console.log(o);
                 }
             });
         });
